@@ -1,4 +1,5 @@
 const { getElementById } = require("domutils");  
+const { closeSync } = require("fs");
 function btn(){
  localStorage.setItem("user", "alumi");
  localStorage.setItem("password", "alumi");
@@ -30,29 +31,20 @@ function btn(){
     alert("please enter correct user name");
  }
 }
-function slot(){
-    mobiscroll.datepicker('#demo-booking-multiple', {
-        controls: ['calendar', 'timegrid'],
-        min: '2022-11-28T00:00',
-        max: '2023-05-28T00:00',
-        minTime: '08:00',
-        maxTime: '19:59',
-        stepMinute: 60,
-        // example for today's labels and invalids
-        labels: [{
-            start: '2022-11-28',
-            textColor: '#e1528f',
-            title: '3 SPOTS'
-        }],
-        invalid: [{
-            start: '2022-11-28T08:00',
-            end: '2022-11-28T13:00'
-        }, {
-            start: '2022-11-28T15:00',
-            end: '2022-11-28T17:00'
-        }, {
-            start: '2022-11-28T19:00',
-            end: '2022-11-28T20:00'
-        }]
-    });
+function reset() {
+    document.getElementsByClassName('butTime').style.backgroundColor = "white";
+ }
+function find(){
+    const date = document.getElementsByClassName("slots").value
+    let time 
+    document.getElementsByClassName("butTime").addEventListener("click", function(){
+       time = document.getElementsByClassName("butTime").value
+       document.body.style.backgroundColor = "blue";
+
+       if(localStorage.getItem(time) && localStorage.key(date)){
+        alert("slot's not exits");
+       }else{
+        localStorage.setItem(date, time)
+       }
+    })
 }
